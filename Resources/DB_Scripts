@@ -1,1 +1,17 @@
+CREATE TABLE `jobdetails` (
+  `Jobid` int(11) NOT NULL AUTO_INCREMENT,
+  `jobname` varchar(40) DEFAULT NULL,
+  `jobskills` varchar(40) DEFAULT NULL,
+  `companyname` varchar(50) DEFAULT NULL,
+  `salary` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`Jobid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+ CREATE TABLE `user` (
+  `Userid` int(40) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(70) DEFAULT NULL,
+  `Password` varchar(50) DEFAULT NULL,
+  `Email` varchar(50) DEFAULT NULL,
+  `Usertype` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`Userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
