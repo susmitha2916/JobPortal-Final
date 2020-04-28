@@ -15,3 +15,5 @@ CREATE TABLE `jobdetails` (
   `Usertype` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`Userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+//addedscripts
