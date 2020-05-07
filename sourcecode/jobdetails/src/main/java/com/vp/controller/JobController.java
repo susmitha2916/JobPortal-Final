@@ -23,7 +23,7 @@ public class JobController {
 	JobServiceInterface jobServiceInterface;
 	
 	
-	@GetMapping("/jobs")
+	@GetMapping("/jobs") 
 	public List<Jobdetails> getJobdetails(){
 		return jobServiceInterface.getAllJobdetails();
 	}

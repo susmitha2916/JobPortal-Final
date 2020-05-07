@@ -24,7 +24,7 @@ import lombok.Setter;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long User_id;
+    private Long Userid;
 	@NotBlank(message=" enter a username ")
 	String Username;
 	@NotEmpty(message="password cannot be empty")

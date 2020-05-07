@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.vp.model.User;
 import com.vp.repository.Userrepository;
 @Service
@@ -23,5 +24,8 @@ public void saveUser(User user) {
 	
 	userrepository.save(user);
 }
+
+
+
 
 }
