@@ -16,7 +16,7 @@ import com.vp.repository.JobServiceRepository;
 
 @Service
 @Transactional
-public class JobSearchService implements IJobSearchService{
+public class JobSearchServiceImpl implements IJobSearchService{
 	@Autowired
 	JobServiceRepository jobServiceRepository;
 	
@@ -46,6 +46,16 @@ public class JobSearchService implements IJobSearchService{
 	public List <Jobdetails>getJobsBySalary(String salary1)
 	{
 		return (List<Jobdetails>)jobServiceRepository.getJobsBySalary(salary1);
+	}
+
+
+	@Override
+	public List<Jobdetails> findPaginated(int pageNo, int pageSize) {
+		// TODO Auto-generated method stub
+		
+		Pageable paging =PageRequest.of(pageNo, pageSize);
+		Page<Jobdetails> pagedResult =jobServiceRepository.findAll(paging);
+		return pagedResult.toList();
 	}
 	
 	

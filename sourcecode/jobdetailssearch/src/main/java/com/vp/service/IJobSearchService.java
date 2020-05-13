@@ -14,5 +14,8 @@ List <Jobdetails> findSortedJobs(String paramForSorted);
 	List <Jobdetails>getJobsByCompanyname( String companyname1);
 	
 	List <Jobdetails>getJobsBySalary( String salary1);
+
+	List<Jobdetails> findPaginated(int pageNo, int pageSize);
+	
 	
 }

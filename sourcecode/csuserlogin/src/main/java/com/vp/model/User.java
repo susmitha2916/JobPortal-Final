@@ -8,11 +8,15 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
@@ -20,6 +24,9 @@ import lombok.Setter;
 @NonNull
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table(name = "user")
 public class User {
 	@Id
@@ -28,8 +35,8 @@ public class User {
 	@NotBlank(message=" enter a username ")
 	String Username;
 	@NotEmpty(message="password cannot be empty")
-	@Min(value=6 ,message= "password should be morethan 6 characters")
-	@Max(value=10,message ="password should not ecxeed morethan 10 characters")
+	@Size(min=5,message="password atleast have 5 characters")
+	@Size(max=15, message="password should not exceed 40 character")
 	String Password;
 	@javax.validation.constraints.Email(message="email should format should be abc@gmail.com")
 	String Email;

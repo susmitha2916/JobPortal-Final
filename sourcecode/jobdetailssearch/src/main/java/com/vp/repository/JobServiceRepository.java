@@ -21,5 +21,8 @@ public interface JobServiceRepository extends JpaRepository<Jobdetails, Long>{
 	
 	@Query("select j from Jobdetails j where j.salary=:salary")
 	List <Jobdetails>getJobsBySalary(@Param("salary") String salary1);
+	
+	/*@Query("select * from Jobdetails where 'para' IN(jobskills,jobname,companyname,salary)")
+	List <Jobdetails> findJobsByPara(@Param("para") String para1);*/
 }
 
