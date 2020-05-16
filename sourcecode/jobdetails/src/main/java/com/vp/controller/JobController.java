@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,36 +22,57 @@ import com.vp.exception.JobNotFoundException;
 import com.vp.model.JobDetailsDto;
 import com.vp.model.Jobdetails;
 import com.vp.service.IJobService;
+import com.vp.service.JobServiceImpl;
 
 
 
 @RestController
-@RequestMapping("/papi")
+@RequestMapping("/jobapi")
 public class JobController {
+	
+	Logger log = LoggerFactory.getLogger(JobController.class);
+	
 	@Autowired
 	IJobService jobServiceInterface;
 	
 	//get all jobs
 	
 	@GetMapping("/jobs") 
-	public List<Jobdetails> getJobdetails(){
+	public List<Jobdetails> getJobdetails()
+	
+	{
+		//logging
+		 
+		log.info("get jobdetails method is called");
+		
 		return jobServiceInterface.getAllJobdetails();
 	}
 	
 	// add a job
+	
 	@PostMapping("/job")
 	public void insertJob(@Valid @RequestBody JobDetailsDto job)
+	
 	{
+		//logging
+		  log.info("insert Job method called");
+		
 		jobServiceInterface.createJob(job);
 	}
 	
 	//delete job by id
 	
 	@RequestMapping(value = "/addjobs/{Jobid}", method = RequestMethod.DELETE)
-	public HttpStatus deleteJob(@PathVariable Integer Jobid) 
+	public ResponseEntity deleteJob(@PathVariable Integer Jobid) 
+	
 	{
+		
+		//loging
+				String methodName = "deleteJob()";
+				log.info(methodName+" called");
+				
 		jobServiceInterface.deletejob(Jobid);
-		return HttpStatus.NO_CONTENT;
+		return new ResponseEntity<>(jobServiceInterface.deletejob(Jobid),HttpStatus.OK);
 	}
 	
 	
@@ -57,7 +80,12 @@ public class JobController {
 	
 	@PutMapping("/update/{Jobid}")
 	public ResponseEntity updateJob(@RequestBody Jobdetails jobdetails,@PathVariable Integer Jobid) 
+	
 	{
+		//logging
+		 
+		log.info("updateJob method is called");
+		
 		jobServiceInterface.updateJob(Jobid,jobdetails);
 		return new ResponseEntity<>( jobServiceInterface.updateJob(Jobid,jobdetails),HttpStatus.OK);
 		
@@ -71,25 +99,3 @@ public class JobController {
 
 
 
-/*	// update
-
-@RequestMapping(value = "/addjobs", method = RequestMethod.PUT)
-public HttpStatus updateJobdetails(@RequestBody Jobdetails jobdetails)
-{
-	return jobServiceInterface.updatejobdetails(jobdetails)  ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
-
-}*/
-/*@PostMapping("/addjobs")
-public void insertJobdetails(@Valid @RequestBody Jobdetails jobdetails) {
-	jobServiceInterface.saveJob(jobdetails);
-}*/
-
-/*@PutMapping(value="/users{/id}")
-public UserDemo updateUser(@RequestBody UserDemo userdemo,@PathVariable (value="id")long userId) {
-UserDemo existingUser=	this.userrepository.findById(userId)
-	.orElseThrow(()-> new UserNotFoundException("user not found with id:" +userId) );
-existingUser.setFirstName(userdemo.getFirstName());
-existingUser.setLastName(userdemo.getLastName());
-existingUser.setEmail(userdemo.getEmail());
-return this.userrepository.save(existingUser);
-}*/

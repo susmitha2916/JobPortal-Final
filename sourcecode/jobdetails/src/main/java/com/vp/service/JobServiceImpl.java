@@ -1,5 +1,6 @@
-package com.vp.service;
+ package com.vp.service;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -49,11 +50,15 @@ public class JobServiceImpl implements IJobService{
 		return jobList;
 	}
 	
+	
+	
 	//saving a job to database
 	
 	public JobDetailsDto createJob(JobDetailsDto job) 
 	
 	{
+		log.info("create job method called");
+		
 		ModelMapper maper=new ModelMapper();
 		maper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Jobdetails job1=maper.map(job, Jobdetails.class);
@@ -65,14 +70,27 @@ public class JobServiceImpl implements IJobService{
 	
  //delete a job using id
 	
-	public void deletejob(Integer Jobid) 
+	public String deletejob(Integer Jobid) 
 	
 	{
-		Jobdetails jd=jobRepository.findById(Jobid)
-				.orElseThrow(()-> new JobNotFoundException("job not found with id:" +Jobid));
-		log.error("job id not found error");
-		jobRepository.deleteById(Jobid);
+		//logging
+		
+		String methodName = "deletejob()";
+		log.info(methodName+" called");
+		
+		Optional<Jobdetails>optional=jobRepository.findById(Jobid);
+		if(optional.isPresent()) {
+			
+			jobRepository.deleteById(Jobid);
+			return "job  with "+Jobid+" is deleted";
+		}
+		else
+		{
+		
+		    throw new JobNotFoundException("job not found with id:" +Jobid);
+	
 	}
+}
 	
 	//update a job by id
 	
@@ -80,8 +98,6 @@ public class JobServiceImpl implements IJobService{
 	public String updateJob(Integer Jobid, Jobdetails jobdetails) 
 	
 	{
-		
-		
 		Jobdetails existingJob=this.jobRepository.findById(Jobid)
 				.orElseThrow(()-> new JobNotFoundException("job not found with id:" +Jobid));
 							

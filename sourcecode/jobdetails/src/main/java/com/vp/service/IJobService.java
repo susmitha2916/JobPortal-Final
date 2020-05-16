@@ -1,5 +1,6 @@
 package com.vp.service;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 
@@ -12,10 +13,10 @@ public interface IJobService {
 	public List<Jobdetails> getAllJobdetails();
 	//public void saveJob(Jobdetails jobdetails);
 	//public boolean updatejobdetails(Jobdetails jobdetails);
-	public void deletejob(Integer Jobid) throws JobNotFoundException;
+	public String deletejob(Integer Jobid) throws JobNotFoundException;
 	public String updateJob(Integer jobid, Jobdetails jobdetails);
 	
 	public JobDetailsDto createJob(JobDetailsDto job);
-
+	
 }
 

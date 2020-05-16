@@ -31,7 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.httpBasic().and().authorizeRequests()
-		.antMatchers("/papi/**").hasRole("ADMIN")
+		.antMatchers("/jobapi/**").hasRole("ADMIN")
 		.and().csrf().disable();
 		//super.configure(http);
 	}
@@ -39,11 +39,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// TODO Auto-generated method stub
-		String password=passwordEncoder().encode("pass123");
-		auth.inMemoryAuthentication().withUser("susmitha").password(password).roles("ADMIN");
+		//String password=passwordEncoder().encode("pass123");
+		auth.inMemoryAuthentication().withUser(username).password(password).roles("ADMIN");
 		//super.configure(auth);
 	}
-	@Bean
+@Bean
 public PasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
 }

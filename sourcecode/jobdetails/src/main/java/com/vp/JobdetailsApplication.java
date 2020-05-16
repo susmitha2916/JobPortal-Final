@@ -24,7 +24,7 @@ public class JobdetailsApplication {
 	public Docket swaggerConfiguration() { return 
 		    new
 		      Docket(DocumentationType.SWAGGER_2) .select()
-		      .paths(PathSelectors.ant("/papi/*"))
+		      .paths(PathSelectors.ant("/jobapi/*"))
 		      .apis(RequestHandlerSelectors.basePackage("com.vp")) .build();
 
 }*/
